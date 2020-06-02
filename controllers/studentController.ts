@@ -12,7 +12,6 @@ export const rootRouter = async(context: any) => {
 export const getStudents = async (context: Context) => {
     await client.connect();
     const result: QueryResult = await client.query(`SELECT * FROM student`);
-    console.log(result);
     if (result.rows.length <= 0) {
       context.response.body = { message: "student empty" };
       context.response.status = 302;
@@ -73,7 +72,6 @@ export const updateStudent = async(context: any) => {
         },
       });
       const { name, age, student_main_class } = reqBody.value;
-      console.log(name, age, student_main_class, context.params.studentId);
       try {
         await client.connect();
         await client.query(
